@@ -360,6 +360,13 @@ nav ul li a:hover {
 .why-image {
     flex: 1;
 }
+.error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 4px;
+    min-height: 18px;
+  }
+  
 
 .why-image img {
     width: 100%;
