@@ -1,5 +1,6 @@
 <?php
 require_once 'config.php';
+require_once 'mail.php';
 
 $success_message = '';
 $errors = [];
@@ -25,36 +26,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!preg_match("/^[a-zA-Z\s'-]+$/", $first_name)) {
         $errors['first_name'] = "Only letters, spaces, apostrophes, and hyphens are allowed.";
     }
-
     if (!preg_match("/^[a-zA-Z\s'-]+$/", $last_name)) {
         $errors['last_name'] = "Only letters, spaces, apostrophes, and hyphens are allowed.";
     }
-
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = "Invalid email format.";
     }
-
     if (!is_numeric($age) || $age < 15) {
         $errors['age'] = "You must be at least 15 years old.";
     }
-
     if (strlen($password) < 6) {
         $errors['password'] = "Password must be at least 6 characters long.";
     }
 
     if (empty($errors)) {
-        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
         $stmt->execute([$email]);
 
         if ($stmt->fetch()) {
             $errors['email'] = "Email already exists.";
         } else {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $pdo->prepare("INSERT INTO users (first_name, last_name, email, password, age, weight_goal, dietary_preferences, allergies) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $code = rand(100000, 999999);
+            $expiry = date('Y-m-d H:i:s', time() + 600); 
 
-            if ($stmt->execute([$first_name, $last_name, $email, $hashed_password, $age, $weight_goal, $dietary_preferences, $allergies])) {
-                $success_message = "Sign-up successful! Redirecting...";
-                header("Refresh: 3; url=login.php");
+            $stmt = $pdo->prepare("
+                INSERT INTO users (first_name, last_name, email, password, age, weight_goal, dietary_preferences, allergies, verification_code, verification_expiry)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ");
+
+            $success = $stmt->execute([
+                $first_name, $last_name, $email, $hashed_password, $age,
+                $weight_goal, $dietary_preferences, $allergies,
+                $code, $expiry
+            ]);
+
+            if ($success) {
+                $subject = "Bodylift Email Verification";
+                $message = "Your verification code is: $code. It expires in 10 minutes.";
+                $headers = "From: BodyLift <no-reply@bodylift.com>";
+
+                mail($email, $subject, $message, $headers);
+                header("Location: verify_email.php?email=" . urlencode($email));
+                exit;
             } else {
                 $errors['general'] = "Registration failed. Please try again.";
             }
