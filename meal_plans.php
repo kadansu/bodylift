@@ -153,6 +153,7 @@ $meal_plans = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                     <p><strong>Macros:</strong> Carbs: <?php echo round($meal_data['macros']['carbs'], 2); ?>g, Protein: <?php echo round($meal_data['macros']['protein'], 2); ?>g, Fat: <?php echo round($meal_data['macros']['fat'], 2); ?>g</p>
                                 <?php endforeach; ?>
                             <?php endforeach; ?>
+                          <a href="report.php?plan_id=<?php echo $plan['id']; ?>" class="btn btn-secondary">📥 Download PDF</a>
                             <a href="meal_plans.php?delete=<?php echo $plan['id']; ?>" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this meal plan?');">Delete</a>
                         </div>
                     <?php endforeach; ?>

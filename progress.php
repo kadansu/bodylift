@@ -31,9 +31,16 @@ if (isset($_GET['delete'])) {
     }
 }
 
-$stmt = $pdo->prepare("SELECT * FROM progress WHERE user_id = ? ORDER BY recorded_at DESC");
+$stmt = $pdo->prepare("SELECT * FROM progress WHERE user_id = ? ORDER BY recorded_at ASC");
 $stmt->execute([$user_id]);
 $progress_entries = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$dates = [];
+$weights = [];
+foreach ($progress_entries as $entry) {
+    $dates[] = $entry['recorded_at'];
+    $weights[] = $entry['weight'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +51,7 @@ $progress_entries = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <title>Progress Tracker - NutriLift</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <?php include 'header.php'; ?>
@@ -73,6 +81,8 @@ $progress_entries = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <?php if (empty($progress_entries)): ?>
                 <p>No progress entries yet. Add your weight above to get started.</p>
             <?php else: ?>
+                <canvas id="progressChart" width="600" height="300"></canvas>
+
                 <div class="progress-grid">
                     <?php foreach ($progress_entries as $entry): ?>
                         <div class="progress-entry">
@@ -87,6 +97,42 @@ $progress_entries = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </main>
 
     <?php include 'footer.php'; ?>
-    <script src="script.js"></script>
+
+    <script>
+        const ctx = document.getElementById('progressChart').getContext('2d');
+        const progressChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: <?php echo json_encode($dates); ?>,
+                datasets: [{
+                    label: 'Weight (kg)',
+                    data: <?php echo json_encode($weights); ?>,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: '#00c853',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Weight (kg)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>

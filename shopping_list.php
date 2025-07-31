@@ -52,6 +52,10 @@ foreach ($meal_plans as $plan) {
     <main class="container">
         <section>
             <h2>Shopping List</h2>
+            <?php if (!empty($shopping_list)): ?>
+    <a href="generate_shopping_list.php" class="btn btn-secondary" style="margin-bottom: 20px;">📥 Download Shopping List as PDF</a>
+<?php endif; ?>
+
             <?php if (empty($shopping_list)): ?>
                 <p>No items in your shopping list. Generate a meal plan to get started.</p>
             <?php else: ?>
