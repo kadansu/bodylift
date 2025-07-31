@@ -61,8 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <button type="submit" class="btn btn-primary">Login</button>
             </form>
-            <p>Forgot your password? <a href="forgot_password.php">Reset it here</a>.</p>
-            <p>Don't have an account? <a href="signup.php">Sign up</a>.</p>
+            <p>Forgot your password?   <a href="forgot_password.php" style="background-color: red; color: white; padding: 2px 6px; border-radius: 2px; text-decoration: none;">Reset it here</a>.
+</p>
+            <p>Don't have an account? <a href="signup.php" style="background-color:#ffb300; color: white; padding: 2px 6px; border-radius: 2px; text-decoration: none;">Signup</a></p>
         </section>
     </main>
 

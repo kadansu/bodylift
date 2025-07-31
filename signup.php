@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <button type="submit" class="btn btn-primary">Sign Up</button>
         </form>
-        <p>Already have an account? <a href="login.php">Log in</a>.</p>
+        <p>Already have an account? <a href="login.php" style="background-color:#ffb300; color: white; padding: 2px 6px; border-radius: 2px; text-decoration: none;">login</a></p>
     </section>
 </main>
 <?php include 'footer.php'; ?>
