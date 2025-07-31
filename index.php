@@ -32,13 +32,13 @@ session_start();
     <main class="container">
         <section class="features-section">
             <h2>What to Expect</h2>
-            <p>NutriLift is designed to help you gain weight in a healthy, sustainable way. Here’s a preview of the tools and features waiting for you.</p>
+            <p>Bodylift is designed to help you gain weight in a healthy, sustainable way. Here’s a preview of the tools and features waiting for you.</p>
             <div class="features-grid">
                 <!-- Feature 1: User Profile -->
                 <div class="feature-card">
                     <i class="fas fa-user-circle feature-icon"></i>
                     <h3>Personalized Profile</h3>
-                    <p>Create your profile with details like your weight goal, dietary preferences, and allergies. NutriLift tailors everything to your unique needs.</p>
+                    <p>Create your profile with details like your weight goal, dietary preferences, and allergies. Bodylift  tailors everything to your unique needs.</p>
                 </div>
                 <!-- Feature 2: Meal Plan Generator -->
                 <div class="feature-card">
@@ -67,12 +67,12 @@ session_start();
             </div>
         </section>
 
-        <!-- Why NutriLift Section -->
-        <section class="why-nutrilift">
-            <h2>Why NutriLift?</h2>
+        <!-- Why Bodylift Section -->
+        <section class="why-Bodylift ">
+            <h2>Why Bodylift ?</h2>
             <div class="why-content">
                 <div class="why-text">
-                    <p>NutriLift is your partner in achieving healthy weight gain, especially for underweight individuals like breastfeeding mothers. Our AI-driven system creates weekly meal plans tailored to your dietary preferences and allergies, provides detailed nutritional analysis, and even generates a shopping list to simplify your journey. With NutriLift, you’ll have all the tools you need to nourish your body and reach your goals.</p>
+                    <p>Bodylift  is your partner in achieving healthy weight gain, especially for underweight individuals like breastfeeding mothers. Our AI-driven system creates weekly meal plans tailored to your dietary preferences and allergies, provides detailed nutritional analysis, and even generates a shopping list to simplify your journey. With NutriLift, you’ll have all the tools you need to nourish your body and reach your goals.</p>
                     <a href="signup.php" class="btn btn-primary">Start Your Journey</a>
                 </div>
                 <div class="why-image">

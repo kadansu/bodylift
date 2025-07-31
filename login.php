@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - NutriLift</title>
+    <title>Login - Bodylift </title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <section class="hero">
         <div class="container">
-            <h1>Login to NutriLift</h1>
+            <h1>Login to Bodylift </h1>
             <p>Access your personalized meal plans.</p>
         </div>
     </section>

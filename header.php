@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
     <div class="container">
         <nav class="navbar">
             <div class="logo">
-                <a href="index.php">NutriLift <span>🍽️</span></a>
+                <a href="index.php">BodyLift <span>🍽️</span></a>
             </div>
             <ul>
                 <?php if (isset($_SESSION['user_id'])): ?>
